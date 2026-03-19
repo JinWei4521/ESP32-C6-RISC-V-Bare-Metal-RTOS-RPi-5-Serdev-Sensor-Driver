@@ -1,0 +1,12 @@
+sudo insmod c6_driver.ko
+sudo rmmod c6_driver.ko
+
+dtc -@ -I dts -O dtb -o c6_sensor.dtbo c6_sensor.dts
+sudo cp c6_sensor.dtbo /boot/firmware/overlays/
+sudo dtoverlay c6_sensor
+
+cat /proc/devices | grep esp32_sensor
+sudo mknod /dev/tty_sensor c 510 0
+sudo chmod 666 /dev/tty_sensor
+
+gcc test_sensor.c -o test_sensor -pthread

@@ -1,0 +1,18 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+    fragment@0 {
+        /* Define the target path for the UART4 device */
+        target-path = "/axi/pcie@120000/rp1/serial@40000"; 
+        
+        __overlay__ {
+            status = "okay";
+
+            esp32_sensor {
+                compatible = "mycompany,esp32-sensor";
+                status = "okay";
+            };
+        };
+    };
+};
